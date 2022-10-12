@@ -14,27 +14,26 @@ public class Product {
     }
     //    line là những dòng để ghi file
     public static Product parseProduct(String line) {
-        String[] array = line.split(",");
-        Product product = new Product();
-        product.setIdProduct(Long.parseLong(array[0]));
-        product.setNameProduct(array[1]);
-        product.setPrice(Double.parseDouble(array[2]));
-        product.setQuantity(Integer.parseInt(array[3]));
-        return product;
-
-
-//
 //        String[] array = line.split(",");
-//        String sIdProduct = array[0];
-//        String nameProduct = array[1];
-//        String sPrice = array[2];
-//        String sQuantity = array[3];
 //
-//        long idProduct = Long.parseLong(sIdProduct);
-//        double price = Double.parseDouble(sPrice);
-//        int quantity = Integer.parseInt(sQuantity);
-//
-//        return new Product(idProduct, nameProduct, price, quantity);
+//        Product product = new Product();
+//        product.setIdProduct(Long.parseLong(array[0]));
+//        product.setNameProduct(array[1]);
+//        product.setPrice(Double.parseDouble(array[2]));
+//        product.setQuantity(Integer.parseInt(array[3]));
+//        return product;
+
+        String[] array = line.split(",");
+        String sIdProduct = array[0];
+        String nameProduct = array[1];
+        String sPrice = array[2];
+        String sQuantity = array[3];
+
+        long idProduct = Long.parseLong(sIdProduct);
+        double price = Double.parseDouble(sPrice);
+        int quantity = Integer.parseInt(sQuantity);
+
+        return new Product(idProduct, nameProduct, price, quantity);
 
     }
 

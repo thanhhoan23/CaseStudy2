@@ -15,27 +15,59 @@ public class ProductView {
 
     public static void addProduct() {
 
-        boolean checkProduct = false;
+        boolean check = false;
         do{
-            System.out.println("⟹⟹⟹⟹ Thêm sản phẩm ⟸⟸⟸⟸");
-            long idProduct = System.currentTimeMillis()/1000;
-            System.out.println("Nhập tên sản phẩm:");
-            String name = input.nextLine();
-            System.out.println("Nhập giá sản phẩm:");
-            double price = input.nextDouble();
-            System.out.println("Nhập số lượng sản phẩm:");
-            int quantity = input.nextInt();
+            try{
+                System.out.println("⟹⟹⟹⟹ Thêm sản phẩm ⟸⟸⟸⟸");
+                long idProduct = System.currentTimeMillis()/1000;
+                System.out.println("Nhập tên sản phẩm:");
+                System.out.print("⟹");
+                String name;
+                
+                do {
+                    name = input.nextLine().trim();
+                    if (name.equals("") ||name.equals(null)) {
+                        System.out.println("Vui lòng nhập lại tên sản phẩm");
+                        System.out.print("⟹");
+                    }
+                } while (name.equals("") ||name.equals(null));
 
-            Product product = new Product(idProduct, name, price, quantity);
-            productService.addProduct(product);
-            System.out.println("Đã thê thành công");
-            showProductList();
-            Menu.menuManagerProduct();
+                System.out.println("Nhập giá sản phẩm:");
+                System.out.print("⟹");
+                double price;
+
+                do {
+                    price = Double.parseDouble(input.nextLine());
+                    if (!(price > 1000)) {
+                        System.out.println("Giá tiền không được nhỏ hơn 1000");
+                        System.out.print("⟹ ");
+                    }
+                } while (!(price > 1000));
+
+                System.out.println("Nhập số lượng sản phẩm:");
+                System.out.print("⟹");
+                int quantity;
+                do {
+                    quantity = Integer.parseInt(input.nextLine());
+                    if (quantity<0) {
+                        System.out.println("Khối lượng không được nhỏ hơn 0.");
+                        System.out.print("⟹ ");
+                    }
+                } while (quantity<0);
+                Product product = new Product(idProduct, name, price, quantity);
+                productService.addProduct(product);
+                System.out.println("Đã thêm thành công");
+                showProductList();
+                Menu.menuManagerProduct();
+
+            } catch (NumberFormatException e) {
+                System.out.println("Vui lòng nhập lại.");
+            }
 
         } while (true);
 
     }
-    public void showProductListShow(){
+    public static void showProductListShow(){
         showProductList();
         int choose;
         do {
@@ -58,4 +90,10 @@ public class ProductView {
         }
     }
 
+
+//    Sửa thông tin sản phẩm
+//    1 sửa tên sản phẩm qua id
+//    public static void editNameProductById() {
+//
+//    }
 }

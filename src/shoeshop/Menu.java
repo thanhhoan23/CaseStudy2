@@ -77,7 +77,7 @@ public class Menu {
                 default:
                     System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
                     System.out.print("⟹");
-                    check = false;
+//                    check = false;
             }
         } while (!check);
     }
@@ -104,6 +104,8 @@ public class Menu {
                     ProductView.addProduct();
                     break;
                 case "2":
+
+
                     break;
                 case "3":
                     break;
