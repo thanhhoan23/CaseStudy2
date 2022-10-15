@@ -7,6 +7,11 @@ import java.util.Scanner;
 public class UserView {
     static Scanner input = new Scanner(System.in);
 
+//    tạo tài khỏan
+    public static void signIn(){
+
+    }
+
     //    Phần đăng nhập
     public static void logIn() {
 //        boolean check= false;

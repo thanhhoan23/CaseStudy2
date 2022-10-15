@@ -1,6 +1,9 @@
 package shoeshop;
 
+import utils.RetryUtils;
+import views.ChooseStatus;
 import views.ProductView;
+import views.SortView;
 import views.UserView;
 
 import java.util.Scanner;
@@ -13,11 +16,11 @@ public class Menu {
             boolean check = true;
             String choose;
 
-            System.out.println("⟹⟹⟹⟹⟹Shoe Shop⟸⟸⟸⟸⟸");
-            System.out.println("⟹      1. Đăng nhập     ⟸");
-            System.out.println("⟹    2. Tạo tài khoản   ⟸");
-            System.out.println("⟹ 0. Thoát chương trình ⟸");
-            System.out.println("⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸");
+            System.out.println("⟹⟹⟹⟹⟹ Shoe  Shop ⟸⟸⟸⟸⟸⟸");
+            System.out.println("⟹      1. Đăng nhập          ⟸");
+            System.out.println("⟹      2. Tạo tài khoản      ⟸");
+            System.out.println("⟹   0. Thoát chương trình    ⟸");
+            System.out.println("⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸");
             System.out.println("Vui lòng chọn chức năng:");
             System.out.print("=>");
             do {
@@ -97,23 +100,27 @@ public class Menu {
         System.out.println("Vui lòng chọn chức năng:");
         System.out.print("=>");
         do {
-            choose = input.nextLine();
+            choose = input.nextLine().trim();
 
             switch (choose) {
                 case "1":
                     ProductView.addProduct();
                     break;
                 case "2":
-
-
+                    ProductView.editProduct();
                     break;
                 case "3":
+                    ProductView.removeProduct();
                     break;
                 case "4":
+                    ProductView.showProductList();
+                    RetryUtils.isRetry(ChooseStatus.FIND);
                     break;
                 case "5":
+                    ProductView.findProduct();
                     break;
                 case "6":
+                    SortView.menuSort();
                     break;
                 case "0":
                     break;
