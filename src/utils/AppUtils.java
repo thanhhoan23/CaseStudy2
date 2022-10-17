@@ -28,4 +28,16 @@ public class AppUtils {
             }
         } while (true);
     }
+    public static int retryParseInt() {
+        int result;
+        do {
+            try {
+                result = Integer.parseInt(input.nextLine());
+                return result;
+            } catch (Exception ex) {
+                System.out.println("Nhập sai! vui lòng nhập lại");
+                System.out.print("=> ");
+            }
+        } while (true);
+    }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CSVUtils {
 
-//    dùng chung
+    //    dùng chung
     //    ghi file
     public static <T> void write(String path, List<T> items) {
         try {
@@ -32,7 +32,8 @@ public class CSVUtils {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
             while ((line = br.readLine()) != null) {
-                items.add(line);
+                if (!line.trim().isEmpty())
+                    items.add(line);
             }
         } catch (IOException e) {
             throw new RuntimeException(path + "không có dữ liệu");
@@ -40,7 +41,6 @@ public class CSVUtils {
         return items;
     }
 }
-
 
 
 ////    Ghi file product.csv

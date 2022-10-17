@@ -23,6 +23,7 @@ public class ProductService implements IProductService {
 
     public ProductService() {
     }
+
     @Override
     public List<Product> findAllProducts() {
         List<Product> products = new ArrayList<>();
@@ -42,11 +43,12 @@ public class ProductService implements IProductService {
         products.add(newProduct);
         CSVUtils.write(path, products);
     }
-//Xóa sản phẩm theo id
+
+    //2. Xóa sản phẩm theo id
     @Override
     public void removeProduct(long productId) {
         List<Product> products = findAllProducts();
-        for (int  i =0; i< products.size(); i++) {
+        for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getIdProduct() == productId) {
                 products.remove(i);
                 break;
@@ -54,6 +56,8 @@ public class ProductService implements IProductService {
         }
         CSVUtils.write(path, products);
     }
+
+//    3. xóa sản phẩm theo thể loại
     @Override
     public void removeProductByCategory(String category) {
         List<Product> products = findAllProducts();
@@ -69,7 +73,19 @@ public class ProductService implements IProductService {
 //        }
 
     }
+//   Tìm sản phẩm bằng id
+    @Override
+    public Product findProductById(long id) {
+        List<Product> products = findAllProducts();
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getIdProduct() == id) {
+                return products.get(i);
+            }
+        }
+        return null;
+    }
 
+    //    tìm sản phẩm bằng tên
     @Override
     public List<Product> findProductByName(String nameProduct) {
         List<Product> products = findAllProducts();
@@ -97,69 +113,70 @@ public class ProductService implements IProductService {
         }
         return listFind;
     }
-
-
-//   ♥️ Sửa thông tin sản phẩm
-
-//    public Product checkId(Long idProduct) {
-//        List<Product> products = findAllProducts();
-//        for (Product product : products) {
-//            if (product.getIdProduct().equals(idProduct))
-//                return product;
-//        }
-//        return null;
-//    }
-
-    //    Tìm ra sản phẩm theo id
-    public Product  findProductById(long id) {
-        List<Product> products = findAllProducts();
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getIdProduct() == id) {
-                return products.get(i);
-            }
-        }
-        return null;
-    }
-
-//    tìm Id có tồn tại hay không
+    @Override
     public boolean exitsById(Long idProduct) {
-        return findProductById(idProduct) != null;
+            return findProductById(idProduct) != null;
     }
+
+    @Override
     public boolean exitsByCategory(String category) {
         return findProductByCategory(category) != null;
     }
-
+    @Override
     public int findIndexProductById(long id) {
         List<Product> products = findAllProducts();
         int index = -1;
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getIdProduct() == id) {
-                index=i;
+                index = i;
                 return index;
             }
         }
         return index;
     }
-// Sửa tên sản phẩm
-    public void setNameProduct (int index, String name) {
+
+    // Sửa tên sản phẩm
+    @Override
+    public void setNameProduct(int index, String name) {
         List<Product> products = findAllProducts();
         products.get(index).setNameProduct(name);
         products.get(index).setUpdatedAt(Instant.now().toString());
         CSVUtils.write(path, products);
     }
-//    Sửa giá sản phẩm
-    public void setPriceProduct (int index, double price) {
-        List <Product> products = findAllProducts();
+
+    //    Sửa giá sản phẩm
+   @Override
+    public void setPriceProduct(int index, double price) {
+        List<Product> products = findAllProducts();
         products.get(index).setPrice(price);
         products.get(index).setUpdatedAt(Instant.now().toString());
         CSVUtils.write(path, products);
     }
-//    sửa khối lượng sản phẩm
-    public void setQuantityProduct (int index, int quantity) {
+
+    //    Sửa khối lượng sản phẩm
+    @Override
+    public void setQuantityProduct(int index, int quantity) {
         List<Product> products = findAllProducts();
         products.get(index).setQuantity(quantity);
         products.get(index).setUpdatedAt(Instant.now().toString());
         CSVUtils.write(path, products);
+    }
+
+//    Cập nhật khối lượng ở phần order sản phẩm
+    @Override
+    public void updateQuantity(Long idProduct, Double quantity) {
+        List<Product> products = findAllProducts();
+        for (Product oldProduct : products) {
+            if (oldProduct.getIdProduct() == (idProduct)) {
+                Double oldQuantity = oldProduct.getQuantity();
+                if (oldQuantity >= quantity) {
+                    oldProduct.setQuantity(oldQuantity - quantity);
+                    CSVUtils.write(path, products);
+                    break;
+                }
+            }
+        }
+
     }
 }
 

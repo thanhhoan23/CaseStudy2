@@ -2,20 +2,22 @@ package utils;
 
 import shoeshop.Menu;
 import views.ChooseStatus;
+import views.ProductView;
+import views.UserView;
 
 import java.util.Scanner;
 
 public class RetryUtils {
     public static final Scanner input = new Scanner(System.in);
 
-    public static boolean isRetry(ChooseStatus inputOption) {
+    public static boolean isRetryProduct(ChooseStatus inputOption) {
         do {
             switch (inputOption) {
                 case ADD:
                     System.out.println("Nhấn 'c' để thêm tiếp \t|\t 'b' để quay lại \t|\t 'e' để thoát chương trình");
                     break;
                 case EDIT:
-                    System.out.println("Nhấn 'c' để sửa tiếp \t|\t 'b' để quay lại\t|\t 'e' để thoát chương trình");
+                    System.out.println("Nhấn 'c' để sửa tiếp \t|\t 'b' để quay lại \t|\t 'e' để thoát chương trình");
                     break;
                 case FIND:
                     System.out.println("Nhấn 'c' để tìm tiếp \t|\t 'b' để quay lại\t|\t 'e' để thoát chương trình");
@@ -23,28 +25,116 @@ public class RetryUtils {
                 case REMOVE:
                     System.out.println("Nhấn 'c' để xóa tiếp \t|\t 'b' để quay lại\t|\t 'e' để thoát chương trình");
                     break;
+                case DISPLAY:
+                    System.out.println("Nhấn 'b' để quay lại\t|\t 'e' để thoát chương trình");
+                    break;
+                case DISORDER:
+                    System.out.println("Nhấn 'b' để quay lại\t|\t 'e' để thoát chương trình");
+                    break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + inputOption);
             }
-
-            System.out.print(" ⭆ ");
+            System.out.print("⟹");
             String option = input.nextLine();
-            switch (option) {
-                case "c":
-                    return true;
-                case "b":
-                    Menu.menuManagerProduct();
-                    return false;
-                case "e":
-                    exit();
-                    break;
-                default:
-                    System.out.println("Chọn chức năng không đúng! Vui lòng chọn lại");
-                    break;
-            }
+            do {
+                switch (option) {
+                    case "c":
+                        switch (inputOption) {
+                            case ADD:
+                                ProductView.addProduct();
+                                break;
+                            case EDIT:
+                                ProductView.editProduct();
+                                break;
+                            case REMOVE:
+                                ProductView.removeProduct();
+                                break;
+                            case FIND:
+                                ProductView.findProduct();
+                                break;
+                        }
+                        break;
+                    case "b":
+                        switch (inputOption) {
+                            case ADD:
+                            case EDIT:
+                            case REMOVE:
+                            case FIND:
+                            case DISPLAY:
+                                Menu.menuManagerProduct();
+                                break;
+                            case DISORDER:
+                                Menu.menuManagerOrder();
+                                break;
+
+                        }
+
+                    case "e":
+                        exit();
+                        break;
+                    default:
+                        System.out.println("Chọn chức năng không đúng! Vui lòng chọn lại");
+                        break;
+                }
+            } while (true && option== null);
         } while (true);
     }
+    public static boolean isRetryUser(ChooseStatus inputOption) {
+        do {
+            switch (inputOption) {
+                case ADD:
+                    System.out.println("Nhấn 'c' để thêm tiếp \t|\t 'b' để quay lại \t|\t 'e' để thoát chương trình");
+                    break;
+                case EDIT:
+                    System.out.println("Nhấn 'c' để sửa tiếp \t|\t 'b' để quay lại \t|\t 'e' để thoát chương trình");
+                    break;
+                case FIND:
+                    System.out.println("Nhấn 'c' để tìm tiếp \t|\t 'b' để quay lại\t|\t 'e' để thoát chương trình");
+                    break;
+                case REMOVE:
+                    System.out.println("Nhấn 'c' để xóa tiếp \t|\t 'b' để quay lại\t|\t 'e' để thoát chương trình");
+                    break;
+                case BACKMENUUSER:
+                    System.out.println("Nhấn 'c' để tiếp tục \t|\t 'b' để quay lại\t|\t 'e' để thoát chương trình");
+                    break;
 
+                default:
+                    throw new IllegalStateException("Unexpected value: " + inputOption);
+            }
+            System.out.print("⟹");
+            String option = input.nextLine();
+            do {
+                switch (option) {
+                    case "c":
+                        switch (inputOption) {
+                            case ADD:
+                                break;
+                            case EDIT:
+                                UserView.editInformation();
+                                break;
+                            case REMOVE:
+                                UserView.removeUserByNameAccount();
+                                break;
+                            case FIND:
+                                break;
+                            case BACKMENUUSER:
+                                UserView.setRoleUser();
+                                break;
+                        }
+                        break;
+                    case "b":
+                        Menu.menuManagerUsers();
+                        break;
+                    case "e":
+                        exit();
+                        break;
+                    default:
+                        System.out.println("Chọn chức năng không đúng! Vui lòng chọn lại");
+                        break;
+                }
+            } while (true && option==null);
+        } while (true);
+    }
     public static void exit() {
         System.out.println("\tTạm biệt. Hẹn gặp lại lần sau!");
         System.exit(5);

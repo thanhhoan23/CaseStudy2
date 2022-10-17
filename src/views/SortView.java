@@ -4,14 +4,11 @@ import models.Product;
 import services.ProductService;
 import services.sort.*;
 import shoeshop.Menu;
-import utils.CSVUtils;
 import utils.InstantUtils;
 import utils.RetryUtils;
 
 import java.util.List;
 import java.util.Scanner;
-
-import static views.ProductView.showProductList;
 
 public class SortView {
     private static final Scanner input = new Scanner(System.in);
@@ -21,26 +18,24 @@ public class SortView {
             boolean check = true;
             String choose;
 
-            System.out.println("⟹⟹⟹⟹⟹⟹⟹⟹Sắp xếp sản phẩm⟸⟸⟸⟸⟸⟸⟸⟸");
-            System.out.println("⟹       1. Sắp xếp theo ID               ⟸");
-            System.out.println("⟹   2. Sắp xếp theo tên sản phẩm         ⟸");
-            System.out.println("⟹   3. Sắp xếp theo giá sản phẩm         ⟸");
-            System.out.println("⟹ 4. Sắp xếp theo thể loại sản phẩm      ⟸");
-            System.out.println("⟹  0. quay lại màn hình quản lý sản phẩm ⟸");
-            System.out.println("⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸");
+            System.out.println("⇅⟹⟹⟹⟹⟹⟹⟹Sắp xếp sản phẩm⟸⟸⟸⟸⟸⟸⟸⟸⇅");
+            System.out.println("⇅   1. Sắp xếp theo ID                     ⇅");
+            System.out.println("⇅   2. Sắp xếp theo tên sản phẩm           ⇅");
+            System.out.println("⇅   3. Sắp xếp theo giá sản phẩm           ⇅");
+            System.out.println("⇅   4. Sắp xếp theo thể loại sản phẩm      ⇅");
+            System.out.println("⇅   0. quay lại màn hình quản lý sản phẩm  ⇅");
+            System.out.println("⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⇅");
             System.out.println("Vui lòng chọn chức năng:");
-            System.out.print("=>");
+            System.out.print("⟹");
             do {
-                choose = input.nextLine().trim();
+                choose = input.nextLine();
                 switch (choose) {
                     case "1":
                         sortProductByID();
                         break;
-
                     case "2":
                         sortProductByName();
                         break;
-
                     case "3":
                         sortProductByPrice();
                         break;
@@ -67,15 +62,15 @@ public class SortView {
             boolean check = true;
             String choose;
 
-            System.out.println("⟹⟹⟹⟹⟹Sắp xếp id sản phẩm⟸⟸⟸⟸⟸");
-            System.out.println("⟹          1. ID tăng dần         ⟸");
-            System.out.println("⟹          2. ID giảm dần         ⟸");
-            System.out.println("⟹     0. quay lại                 ⟸");
-            System.out.println("⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸  ");
+            System.out.println("⇅⟹⟹⟹⟹⟹  Sắp xếp id sản phẩm ⟸⟸⟸⟸⟸⇅");
+            System.out.println("⇅          1. ID tăng dần                ⇅");
+            System.out.println("⇅          2. ID giảm dần                ⇅");
+            System.out.println("⇅          0. quay lại                   ⇅");
+            System.out.println("⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⇅");
             System.out.println("Vui lòng chọn chức năng:");
-            System.out.print("=>");
+            System.out.print("⟹");
             do {
-                choose = input.nextLine().trim();
+                choose = input.nextLine();
                 switch (choose) {
                     case "1":
                         sortIdASC();
@@ -121,15 +116,15 @@ public class SortView {
             boolean check = true;
             String choose;
 
-            System.out.println("⟹⟹⟹⟹⟹Sắp xếp theo tên sản phẩm⟸⟸⟸⟸⟸");
-            System.out.println("⟹          1.  tên theo A-z         ⟸");
-            System.out.println("⟹          2. Tên theo z-a         ⟸");
-            System.out.println("⟹     0. quay lại                 ⟸");
-            System.out.println("⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸  ");
+            System.out.println("⇅⟹⟹⟹⟹⟹ Sắp xếp theo tên sản phẩm ⟸⟸⟸⟸⟸");
+            System.out.println("⇅          1.  tên theo A-z                  ⇅");
+            System.out.println("⇅          2. Tên theo z-a                   ⇅");
+            System.out.println("⇅          0. quay lại                       ⇅");
+            System.out.println("⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⇅");
             System.out.println("Vui lòng chọn chức năng:");
             System.out.print("=>");
             do {
-                choose = input.nextLine().trim();
+                choose = input.nextLine();
                 switch (choose) {
                     case "1":
                         sortNameASC();
@@ -173,15 +168,15 @@ public static void sortProductByPrice() {
         boolean check = true;
         String choose;
 
-        System.out.println("⟹⟹⟹⟹⟹Sắp xếp theo tên sản phẩm⟸⟸⟸⟸⟸");
-        System.out.println("⟹          1.  Giá tăng dần        ⟸");
-        System.out.println("⟹          2. Giá giảm dần         ⟸");
-        System.out.println("⟹     0. quay lại                 ⟸");
-        System.out.println("⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸  ");
+        System.out.println("⇅⟹⟹⟹⟹⟹ Sắp xếp theo tên sản phẩm ⟸⟸⟸⟸⟸");
+        System.out.println("⇅          1.  Giá tăng dần            ⟸");
+        System.out.println("⇅          2. Giá giảm dần         ⟸");
+        System.out.println("⇅     0. quay lại                 ⟸");
+        System.out.println("⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸  ");
         System.out.println("Vui lòng chọn chức năng:");
         System.out.print("=>");
         do {
-            choose = input.nextLine().trim();
+            choose = input.nextLine();
             switch (choose) {
                 case "1":
                     sortPriceASC();
@@ -233,7 +228,7 @@ public static void sortProductByPrice() {
             System.out.println("Vui lòng chọn chức năng:");
             System.out.print("=>");
             do {
-                choose = input.nextLine().trim();
+                choose = input.nextLine();
                 switch (choose) {
                     case "1":
                         sortCategoryASC();
@@ -286,7 +281,7 @@ public static void sortProductByPrice() {
                     product.getUpdatedAt());
         }
         System.out.println("⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸");
-        RetryUtils.isRetry(ChooseStatus.FIND);
+        RetryUtils.isRetryProduct(ChooseStatus.FIND);
     }
 
 }

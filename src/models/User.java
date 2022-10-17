@@ -4,7 +4,7 @@ import java.time.Instant;
 
 public class User {
 private Long idUser;
-private String username;
+private String nameAccountUser;
 private String fullName;
 private String password;
 private String email;
@@ -17,7 +17,7 @@ private Instant timeCreatUser;
 
     public User(Long idUser, String username, String password,String fullName, String email, String phoneNumber, String address, String role, Instant timeCreatUser) {
         this.idUser = idUser;
-        this.username = username;
+        this.nameAccountUser = username;
         this.password = password;
         this.fullName = fullName;
         this.email = email;
@@ -35,12 +35,12 @@ private Instant timeCreatUser;
         this.idUser = idUser;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNameAccountUser() {
+        return nameAccountUser;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setNameAccountUser(String nameAccountUser) {
+        this.nameAccountUser = nameAccountUser;
     }
 
     public String getPassword() {
@@ -99,11 +99,11 @@ private Instant timeCreatUser;
         this.timeCreatUser = timeCreatUser;
     }
 
-    public static User parseUser(String rawUser) {
-        String[] array = rawUser.split(",");
+    public static User parseUser(String newUser) {
+        String[] array = newUser.split(",");
         User user = new User();
         user.setIdUser(Long.parseLong(array[0]));
-        user.setUsername(array[1]);
+        user.setNameAccountUser(array[1]);
         user.setPassword(array[2]);
         user.setFullName(array[3]);
         user.setPhoneNumber(array[4]);
@@ -112,5 +112,19 @@ private Instant timeCreatUser;
         user.setRole(array[7]);
         user.setTimeCreatUser(Instant.parse(array[8]));
         return user;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s",
+                idUser,
+                nameAccountUser,
+                password,
+                fullName,
+                phoneNumber,
+                email,
+                address,
+                role,
+                timeCreatUser);
     }
 }

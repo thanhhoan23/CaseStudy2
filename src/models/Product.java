@@ -7,7 +7,7 @@ public class Product {
     private long idProduct;
     private String nameProduct;
     private double price;
-    private int quantity;
+    private double quantity;
     private String category;
     private String createdAt;
 
@@ -16,7 +16,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(long idProduct, String nameProduct, double price, int quantity,String category) {
+    public Product(long idProduct, String nameProduct, double price, double quantity,String category) {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.price = price;
@@ -24,7 +24,7 @@ public class Product {
         this.category = category;
     }
 
-    public Product(long idProduct, String nameProduct, double price, int quantity, String category, String createdAt, String updatedAt) {
+    public Product(long idProduct, String nameProduct, double price, double quantity, String category, String createdAt, String updatedAt) {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.price = price;
@@ -43,7 +43,7 @@ public class Product {
         product.setNameProduct(array[1]);
 
         product.setPrice(Double.parseDouble(array[2]));
-        product.setQuantity(Integer.parseInt(array[3]));
+        product.setQuantity(Double.parseDouble(array[3]));
         product.setCategory(array[4]);
         product.setCreatedAt(array[5]);
         product.setUpdatedAt(array[6]);
@@ -88,11 +88,11 @@ public class Product {
         this.price = price;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
