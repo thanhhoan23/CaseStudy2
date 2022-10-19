@@ -269,15 +269,15 @@ public static void removeUserByNameAccount() {
     showUserList();
     do {
         try {
-            System.out.println("⟹⟹⟹ Nhập tên tài khoản người dùng mà bạn muốn xóa ⟸⟸⟸ ");
+            System.out.println("Nhập tên tài khoản người dùng mà bạn muốn xóa ");
             System.out.print("⟹");
             String nameAccount = input.nextLine();
             if (userService.exitsByAccount(nameAccount)) {
-                System.out.println("⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸ ");
-                System.out.println("⟹         ► Xóa tài khoản ◄            ⟸");
-                System.out.println("⟹         1.     Đồng ý                ⟸");
-                System.out.println("⟹         2.     Quay lại              ⟸");
-                System.out.println("⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸ ");
+                System.out.println("⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⇅");
+                System.out.println("⇅         ► Xóa tài khoản ◄              ⇅");
+                System.out.println("⇅         1.     Đồng ý                  ⇅");
+                System.out.println("⇅         2.     Quay lại                ⇅");
+                System.out.println("⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⇅");
 
                 System.out.println("Vui lòng chọn chức năng");
                 System.out.print("⟹");

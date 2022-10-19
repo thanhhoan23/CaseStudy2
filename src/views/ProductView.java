@@ -58,7 +58,7 @@ public class ProductView {
 
         do {
             name = input.nextLine();
-            if (name.equals("") || name.equals(null)) {
+            if (name.equals("")) {
                 System.out.println("Vui lòng nhập lại tên sản phẩm");
                 System.out.print("⟹");
                 flag = false;
@@ -212,6 +212,7 @@ public class ProductView {
                             case "1":
                                 productService.setNameProduct(productService.findIndexProductById(idProduct), inputNameProduct(ChooseStatus.EDIT));
                                 showProductList();
+                                RetryUtils.isRetryProduct(ChooseStatus.EDIT);
                                 break;
                             case "2":
                                 productService.setPriceProduct(productService.findIndexProductById(idProduct), inputPriceProduct(ChooseStatus.EDIT));
@@ -220,6 +221,7 @@ public class ProductView {
                             case "3":
                                 productService.setQuantityProduct(productService.findIndexProductById(idProduct), inputQuantityProduct(ChooseStatus.EDIT));
                                 showProductList();
+                                RetryUtils.isRetryProduct(ChooseStatus.EDIT);
                                 break;
                             case "0":
                                 Menu.menuManagerProduct();
@@ -255,7 +257,6 @@ public class ProductView {
                 System.out.println("⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⇅");
                 System.out.println("Vui lòng chọn chức năng");
                 System.out.print("⟹");
-                boolean flag = true;
                 do {
                     choose = input.nextLine();
 
@@ -272,8 +273,9 @@ public class ProductView {
                         default:
                             System.out.println("Lựa chọn không hợp lệ");
                             System.out.print("⟹");
+                            break;
                     }
-                }while (flag);
+                }while (true);
             } catch (Exception e) {
                 System.out.println("Vui lòng nhập lại");
             }
@@ -291,7 +293,7 @@ public class ProductView {
             try {
                 System.out.println(" Nhập id Sản phẩm mà bạn muốn xóa ");
                 System.out.print("⟹");
-                long idProduct = Long.parseLong(input.nextLine());
+                long idProduct =AppUtils.retryParseLong();
 
                 if (productService.exitsById(idProduct)) {
                     System.out.println("⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⇅");
@@ -317,6 +319,7 @@ public class ProductView {
                         default:
                             System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập lại");
                             System.out.println("⟹");
+                            break;
                     }
                     check = RetryUtils.isRetryProduct(ChooseStatus.REMOVE);
                 } else {
