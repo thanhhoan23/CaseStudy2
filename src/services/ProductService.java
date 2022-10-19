@@ -78,7 +78,7 @@ public class ProductService implements IProductService {
     public Product findProductById(long id) {
         List<Product> products = findAllProducts();
         for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getIdProduct() == id) {
+            if (products.get(i).getIdProduct()== id) {
                 return products.get(i);
             }
         }

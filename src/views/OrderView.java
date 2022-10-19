@@ -68,6 +68,7 @@ public class OrderView {
             }
             orderService.add(order);
             System.out.println("Đã tạo order thành công:");
+//            showInvoice();
         } catch (Exception e) {
             System.out.println("Server lỗi. Bạn đã quay lại trang.");
             addOrder();
@@ -98,16 +99,14 @@ public class OrderView {
     }
 
     public static ItemOrder addItemOrders(Long idOrder) {
-        do {
-            try {
-                itemOrderService.findAllItemOrder();
+
                 productView.showProductListForUser();
                 Long id = System.currentTimeMillis() / 1000;
                 System.out.println("Nhập ID sản phẩm bạn muốn mua");
                 System.out.print("=> ");
                 Long idProduct = Long.parseLong(input.nextLine());
                 while (!productService.exitsById(idProduct)) {
-                    System.out.println("ID sản phẩm không tồn tại, vui lòng nhập lại");
+                    System.out.println("ID sản phẩm không tồn tại, vui lòng hãy nhập lại");
                     System.out.print("=> ");
                     idProduct = Long.parseLong(input.nextLine());
                 }
@@ -117,11 +116,11 @@ public class OrderView {
                 System.out.print("=> ");
                 Double quantity = Double.parseDouble(input.nextLine());
                 while (!checkQuantityProduct(product, quantity)) {
-                    System.out.println("Số lượng sản phẩm không đủ, vui lòng nhập lại:");
+                    System.out.println("Số lượng sản phẩm không đủ, vui lòng hãy nhập lại:");
                     System.out.print("=> ");
                     quantity = Double.parseDouble(input.nextLine());
                     if (product.getQuantity() == 0) {
-                        System.out.println("Sản phẩm đã hết hàng.");
+                        System.out.println("Sản phẩm hết hàng.");
                         int choice;
                         do {
                             System.out.println("Nhấn 0 để quay lại quản lý sản phẩm.");
@@ -133,14 +132,9 @@ public class OrderView {
                 String nameProduct = product.getNameProduct();
 //                tiền sản phẩm
                 Double total = quantity * price;
-                Double grandTotal = 0.0;
-                ItemOrder itemOrder = new ItemOrder(id, price, quantity, idOrder, idProduct, nameProduct, total, grandTotal);
+                ItemOrder itemOrder = new ItemOrder(id, price, quantity, idOrder, idProduct, nameProduct, total);
                 productService.updateQuantity(idProduct, quantity);
                 return itemOrder;
-            } catch (Exception e) {
-                System.out.println("Không đúng vui lòng nhập lại.");
-            }
-        } while (true);
     }
 
     public static boolean checkQuantityProduct(Product product, Double quantity) {
@@ -177,144 +171,3 @@ public class OrderView {
         }
     }
 }
-
-//    public static void confirmOrderUser(Order order) {
-//        try {
-//            boolean flag = true;
-//            String choice;
-//            System.out.println("Đã tạo order thành công:");
-//            System.out.println();
-//            System.out.println("⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⇅");
-//            System.out.println("⇅               ► Đơn Hàng ◄             ⇅");
-//            System.out.println("⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⇅");
-//            System.out.println("⇅       1.     In bill                   ⇅");
-//            System.out.println("⇅       2.     Quay lại                  ⇅");
-//            System.out.println("⇅       0.     Exit                      ⇅");
-//            System.out.println("⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⇅");
-//            System.out.println("Chọn chức năng: ");
-//            System.out.print("=> ");
-//            do {
-//                choice = input.nextLine();
-//                switch (choice) {
-//                    case "1":
-//                        showPayInfoUser(order);
-//                        break;
-//                    case "2":
-//                        Menu.menuUser();
-//                        break;
-//                    case "0":
-//                        System.exit(5);
-//                        break;
-//                    default:
-//                        System.out.println("Lựa chọn không hợp lệ vui lòng nhập lại.");
-//                        System.out.print("=> ");
-//                        flag = false;
-//                }
-//            } while (!flag);
-//        } catch (Exception e) {
-//            System.out.println("Server lỗi. Bạn đã được về trang");
-//            confirmOrderUser(order);
-////            e.getStackTrace();
-//        }
-//    }
-//    public static void showPayInfoUser(Order order) {
-//        showPayInfo(order);
-//        int choice;
-//        do {
-//            System.out.println("Nhấn 0 để quay Menu.");
-//            System.out.print("=> ");
-//            choice = AppUtils.retryParseInt();
-//        } while (choice != 0);
-//        Menu.menuUser();
-//    }
-//    public static void showPayInfo(Order order) {
-//        try {
-//            System.out.println("\t⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⇅");
-//            System.out.println("\t⇅                                           HÓA ĐƠN                                         ⇅");
-//            System.out.printf("\t⇅%-20s \t%-30s %16s ║\n", " Tên người đặt       │", order.getFullName(), "");
-//            System.out.printf("\t⇅%-20s \t%-30s %16s ║\n", " Số điện thoại       │", order.getPhone(), "");
-//            System.out.printf("\t⇅%-20s \t%-30s %16s ║\n", " Địa chỉ             │", order.getAddress(), "");
-//            System.out.printf("\t⇅%-20s \t%-30s %16s ║\n", " Ngày tạo đơn        │", order.getTimeCreatOrders(),"");
-//            System.out.printf("\t⇅%-3s │\t%-27s │\t%-14s │\t%-15s ║\n", "STT", "Tên sản phẩm", "Số lượng", "Giá");
-//            System.out.println("\t⇅⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸");
-//            List<ItemOrder> itemOrders = itemOrderService.findAllItemOrder();
-//            double sum = 0;
-//            int count = 0;
-//            for (ItemOrder itemOrder1 : itemOrders) {
-//                if (itemOrder1.getIdOrder().equals(order.getIdOrder())) {
-//                    sum += itemOrder1.getTotalItem();
-//                    count++;
-//                    itemOrder1.setGrandTotal(sum);
-//                    itemOrderService.update(itemOrder1.getIdOrder(), itemOrder1.getPrice(), sum);
-//                    System.out.printf("║ %-2s │\t%-27s │\t%-14s │\t%-15s ║\n",
-//                            count,
-//                            itemOrder1.getNameProduct(),
-//                            InstantUtils.convertVND(itemOrder1.getQuantity()),
-//                            InstantUtils.convertVND(itemOrder1.getPrice()));
-//                }
-//            }
-//            System.out.printf("║                                             Tổng tiền: %17s  ║\n", InstantUtils.convertVND(sum));
-//        } catch (Exception e) {
-//            System.out.println("Nhập không đúng, vui lòng nhập lại");
-//        }
-//    }
-
-
-//    public static void showDetailListOrder() {
-//        try {
-//            List<Order> orders = orderService.findAllOrder();
-//            List<ItemOrder> itemOrders = itemOrderService.findAllItemOrder();
-//            int count = 0;
-//            double printTotal = 0;
-//            double total = 0;
-//            double sum = 0;
-//            double grandTotal = 0;
-//            System.out.println();
-//            System.out.println("⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸Danh sách hóa đơn⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸");
-//            for (Order order : orders) {
-//                System.out.printf("\t║\t%-20s %-50s %-20s %-47s║\n", "Id            : ", order.getIdOrder(), "Tên khách hàng :", order.getFullName());
-//                System.out.printf("\t║\t%-20s %-50s %-20s %-47s║\n", "Số điện thoại : ", order.getPhone(), "Địa chỉ        : ", order.getAddress());
-//                System.out.println("⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸");
-//
-//                System.out.printf("\t║\t%-2s │%-10s %-25s %-10s %-20s %-10s %-20s %-10s %-23s║\n", "STT", "", "Tên Sản Phẩm", "", "Số Lượng", "", "Giá", "", "Tổng Tiền Sản Phẩm");
-//                System.out.println("⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸");
-//
-//                for (ItemOrder itemOrder : itemOrders) {
-//                    if (itemOrder.getIdOrder().equals(order.getIdOrder())) {
-//                        count++;
-//                        total = itemOrder.getPrice() * itemOrder.getQuantity();
-//                        System.out.printf("\t║\t%-3s │%-10s %-25s %-10s %-20s %-10s %-20s %-10s %-23s║\n",
-//                                count, "",
-//                                itemOrder.getNameProduct(), " ",
-//                                InstantUtils.quantityProducts(itemOrder.getQuantity()), " ",
-//                                InstantUtils.convertVND(itemOrder.getPrice()), "",
-//                                InstantUtils.convertVND(total));
-//                        grandTotal += total;
-//                    }
-//                }
-//                printTotal += grandTotal;
-//                System.out.printf("\t Tổng Hóa Đơn:  %15s ⟹⟹⟹\n\n\n", InstantUtils.convertVND(grandTotal));
-//                sum = 0;
-//                grandTotal = 0;
-//                count = 0;
-//            }
-//
-//            System.out.printf("\t\t\t\t\t\t\t Tổng Doanh Thu: %20s \n", InstantUtils.convertVND(printTotal));
-//            System.out.println("⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟹⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸⟸");
-//            int choice;
-//            do {
-//                System.out.println("Nhấn 0 để quay lại quản lý sản phẩm.");
-//                System.out.print("=> ");
-//                choice = AppUtils.retryParseInt();
-//            } while (choice != 0);
-//            Menu.menuManagerOrder();
-//        } catch (Exception e) {
-////            System.out.println("Server lỗi.Bạn đã quay về lại trang. ");
-////            showListOrder();
-//            e.getStackTrace();
-//        }
-//    }
-//
-//
-//
-

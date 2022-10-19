@@ -12,7 +12,7 @@ public class ItemOrder {
 
     public ItemOrder(){};
 
-    public ItemOrder(Long idItemOrder, double price, double quantity, Long idOrder, Long idProduct, String nameProduct, double totalItem, double grandPrice) {
+    public ItemOrder(Long idItemOrder, double price, double quantity, Long idOrder, Long idProduct, String nameProduct, double totalItem) {
         this.idItemOrder = idItemOrder;
         this.price = price;
         this.quantity = quantity;
@@ -20,7 +20,7 @@ public class ItemOrder {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.totalItem = totalItem;
-        this.grandTotal = grandPrice;
+//        this.grandTotal = grandPrice;
     }
 
     public static ItemOrder parseItemOrder(String rawItemOrder) {

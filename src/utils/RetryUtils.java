@@ -68,7 +68,6 @@ public class RetryUtils {
                                 break;
 
                         }
-
                     case "e":
                         exit();
                         break;
@@ -83,13 +82,10 @@ public class RetryUtils {
         do {
             switch (inputOption) {
                 case ADD:
-                    System.out.println("Nhấn 'c' để thêm tiếp \t|\t 'b' để quay lại \t|\t 'e' để thoát chương trình");
+                    System.out.println("Nhấn 'b' để quay lại \t|\t 'e' để thoát chương trình");
                     break;
                 case EDIT:
                     System.out.println("Nhấn 'c' để sửa tiếp \t|\t 'b' để quay lại \t|\t 'e' để thoát chương trình");
-                    break;
-                case FIND:
-                    System.out.println("Nhấn 'c' để tìm tiếp \t|\t 'b' để quay lại\t|\t 'e' để thoát chương trình");
                     break;
                 case REMOVE:
                     System.out.println("Nhấn 'c' để xóa tiếp \t|\t 'b' để quay lại\t|\t 'e' để thoát chương trình");
@@ -113,17 +109,26 @@ public class RetryUtils {
                                 UserView.editInformation();
                                 break;
                             case REMOVE:
+//                                admin xóa
                                 UserView.removeUserByNameAccount();
                                 break;
-                            case FIND:
-                                break;
                             case BACKMENUUSER:
+//                                admin cài đặt phân quyền
                                 UserView.setRoleUser();
                                 break;
                         }
                         break;
                     case "b":
-                        Menu.menuManagerUsers();
+                        switch (inputOption) {
+                            case REMOVE:
+                            case BACKMENUUSER:
+                                Menu.menuManagerUsers();
+                                break;
+                            case ADD:
+//                                add của user
+                                Menu.menuUser();
+                                break;
+                        }
                         break;
                     case "e":
                         exit();

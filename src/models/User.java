@@ -127,4 +127,19 @@ private Instant timeCreatUser;
                 role,
                 timeCreatUser);
     }
+
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "idUser=" + idUser +
+//                ", nameAccountUser='" + nameAccountUser + '\'' +
+//                ", fullName='" + fullName + '\'' +
+//                ", password='" + password + '\'' +
+//                ", email='" + email + '\'' +
+//                ", phoneNumber='" + phoneNumber + '\'' +
+//                ", address='" + address + '\'' +
+//                ", role='" + role + '\'' +
+//                ", timeCreatUser=" + timeCreatUser +
+//                '}';
+//    }
 }

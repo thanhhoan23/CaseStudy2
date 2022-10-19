@@ -30,6 +30,9 @@ public class Menu {
                     case "2":
                         UserView.signIn();
                         break;
+                    case "0":
+                        exit();
+                        break;
                     default:
                         System.out.println("Lựa chọn không hợp lệ vui lòng nhập lại");
                         System.out.print("=>");
@@ -219,6 +222,7 @@ public class Menu {
                     break;
                 case "2":
                     OrderView.addOrder();
+                    RetryUtils.isRetryUser(ChooseStatus.ADD);
                     break;
 //                case "3":
 //                    UserView.editInformation();
