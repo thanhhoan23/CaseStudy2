@@ -60,7 +60,7 @@ public class UserView {
             nameAccount = input.nextLine();
 
             if (!ValidateUtils.isNameAccountInvalid(nameAccount)) {
-                System.out.println("Tên " + nameAccount + " không đúng định dạng." + " Vui lòng nhập lại!" + "Tên tài khoản có thể là viết thường hoặc viết chữ hoa");
+                System.out.println("Tên " + nameAccount + " không đúng định dạng." + " Vui lòng nhập lại!" + "Tên tài khoản phải viết liền không cách có thể là viết thường hoặc viết chữ hoa");
                 check = false;
             } else if (!(userService.exitsByAccount(nameAccount))) {
                 System.out.println("Nhập tên thành công");
